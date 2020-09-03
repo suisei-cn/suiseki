@@ -1,7 +1,11 @@
-import type { Sound, StarList } from '../types'
+import type { Sound } from '../types'
 
-export function categorizeSounds(sounds: Sound[]): StarList {
-  const starList: StarList = {}
+export function categorizeSounds(
+  sounds: Sound[]
+): {
+  [name: string]: Sound[]
+} {
+  const starList = {}
   for (const i of sounds) {
     if (!starList[i.title]) starList[i.title] = []
     starList[i.title].push(i)

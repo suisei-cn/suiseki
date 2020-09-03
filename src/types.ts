@@ -11,7 +11,3 @@ export interface Sound {
   status: number
   source: string
 }
-
-export interface StarList {
-  [name: string]: Sound[]
-}

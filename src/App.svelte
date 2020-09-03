@@ -4,9 +4,9 @@
   import { onMount } from 'svelte'
   import config from './config'
   import { categorizeSounds } from './components/soundProcessor'
-  import type { StarList } from './types'
+  import type { Sound } from './types'
 
-  let starList: StarList = {}
+  let starList: [string, Sound[]][] = []
 
   onMount(async () => {
     await fetch(config.SOUNDS_URL)
@@ -18,7 +18,7 @@
             delete stars[i]
           }
         }
-        starList = stars
+        starList = Object.entries(stars)
       })
       .catch((e) => {
         console.error(e)
