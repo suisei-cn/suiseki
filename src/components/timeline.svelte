@@ -5,8 +5,8 @@
     <small class="artist">{sounds[0].artist}</small>
   </h2>
   <div class="timelineBody">
-    {#each sounds as sound}
-      <TimelineItem sound="{sound}" />
+    {#each sounds as sound, rowIndex}
+      <TimelineItem colIndex="{index}" rowIndex="{rowIndex}" sound="{sound}" />
     {/each}
   </div>
 </div>
@@ -18,6 +18,7 @@
 
   export let sounds: Sound[]
   export let title: string
+  export let index: number
 
   onMount(async () => {})
 </script>
@@ -26,7 +27,7 @@
   @import '../styles/variables.scss';
 
   .timeline {
-    min-width: max(12vw, 260px);
+    min-width: 260px;
     background: #126b91;
   }
 

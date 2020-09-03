@@ -1,24 +1,26 @@
 <div id="app">
   <header id="header">Suiseki</header>
   <main id="container">
-    <div id="timelines">
-      {#each starList as star}
-        <Timeline title="{star[0]}" sounds="{star[1]}" />
+    <div id="timelines" bind:this="{timelines}">
+      {#each starList as star, index}
+        <Timeline title="{star[0]}" sounds="{star[1]}" index="{index}" />
       {/each}
     </div>
   </main>
 </div>
 
 <script lang="ts">
-  import { onMount } from 'svelte'
+  import { onMount, setContext } from 'svelte'
   import config from './config'
   import { categorizeSounds } from './components/soundProcessor'
   import type { Sound } from './types'
   import Timeline from './components/timeline.svelte'
 
   let starList: [string, Sound[]][] = []
+  let timelines: HTMLElement
 
   onMount(async () => {
+    setContext('timelines', timelines)
     await fetch(config.SOUNDS_URL)
       .then((x) => x.json())
       .then((x) => {
@@ -63,5 +65,6 @@
 
   #timelines {
     display: flex;
+    position: relative;
   }
 </style>
