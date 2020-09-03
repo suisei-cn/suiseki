@@ -22,7 +22,7 @@
   @import '../styles/variables.scss';
 
   .timeline {
-    min-width: 12vw;
+    min-width: max(12vw, 260px);
     overflow: hidden;
   }
 
