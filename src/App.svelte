@@ -1,9 +1,11 @@
 <div id="app">
   <header id="header">Suiseki</header>
-  <main id="timelines">
-    {#each starList as star}
-      <Timeline title="{star[0]}" sounds="{star[1]}" />
-    {/each}
+  <main id="container">
+    <div id="timelines">
+      {#each starList as star}
+        <Timeline title="{star[0]}" sounds="{star[1]}" />
+      {/each}
+    </div>
   </main>
 </div>
 
@@ -53,10 +55,13 @@
     box-sizing: border-box;
   }
 
-  #timelines {
-    display: flex;
-    overflow-y: scroll;
+  #container {
+    overflow: scroll;
     height: 94vh;
     box-sizing: border-box;
+  }
+
+  #timelines {
+    display: flex;
   }
 </style>

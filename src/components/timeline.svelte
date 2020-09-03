@@ -1,5 +1,9 @@
 <div class="timeline">
-  <h2 class="title">{title}</h2>
+  <h2 class="title">
+    <span>{title}</span>
+    <br />
+    <small class="artist">{sounds[0].artist}</small>
+  </h2>
   <div class="timelineBody">
     {#each sounds as sound}
       <TimelineItem sound="{sound}" />
@@ -23,18 +27,27 @@
 
   .timeline {
     min-width: max(12vw, 260px);
-    overflow: hidden;
+    background: #126b91;
   }
 
   .title {
-    height: 5vh;
+    color: white;
+    background: #1686b6;
+    margin: 0;
+    padding-top: 0.4vh;
+    height: 9vh;
+    font-size: 1.3rem;
     text-align: center;
     position: sticky;
+    top: 0;
+    z-index: 3;
+
+    .artist {
+      color: #ccc;
+    }
   }
 
   .timelineBody {
-    height: 89vh;
-    overflow-x: scroll;
     position: relative;
   }
 
@@ -42,11 +55,10 @@
     content: '';
     position: absolute;
     width: 4px;
-    background-color: #6cf;
+    background-color: #bbb;
     top: $icon-height / 2;
     bottom: $timeline-height - ($icon-height / 2);
     left: 50%;
     margin-left: -2px;
-    z-index: -1;
   }
 </style>

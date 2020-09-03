@@ -67,6 +67,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    z-index: 2;
   }
 
   .page {
