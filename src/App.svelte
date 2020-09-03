@@ -2,10 +2,7 @@
   <header id="header">Suiseiki</header>
   <main id="timelines">
     {#each starList as star}
-      <h2>{star[0]}</h2>
-      <div>
-        <Timeline sounds="{star[1]}" />
-      </div>
+      <Timeline title="{star[0]}" sounds="{star[1]}" />
     {/each}
   </main>
 </div>
@@ -45,16 +42,21 @@
     margin: 0;
   }
 
-  #timelines {
-    display: flex;
-  }
-
   #header {
-    line-height: 3vw;
+    height: 6vh;
+    line-height: calc(6vh - 8px);
     font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     background: #9a9ccc;
     padding: 4px 8px;
+    box-sizing: border-box;
+  }
+
+  #timelines {
+    display: flex;
+    overflow-y: scroll;
+    height: 94vh;
+    box-sizing: border-box;
   }
 </style>
