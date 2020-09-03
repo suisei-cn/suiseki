@@ -1,5 +1,5 @@
 <div id="app">
-  <header id="header">Suiseiki</header>
+  <header id="header">Suiseki</header>
   <main id="timelines">
     {#each starList as star}
       <Timeline title="{star[0]}" sounds="{star[1]}" />
