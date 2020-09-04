@@ -26,15 +26,17 @@
   export let rowIndex: number
   export let colIndex: number
   export let sound: Sound
+  export let origin: HTMLElement
   let pageStyle = ''
   const dispatch = createEventDispatcher()
 
-  onMount(() => {
+  function calculateAndSetLocation() {
     // Also update vairables.scss!
     const height = 180
     const width = 300
     const titleHeight = 70
 
+    const boundingRect = origin.getBoundingClientRect()
     const innerHeight = window.innerHeight
     const innerWidth = window.innerWidth
     // Optimized targetTop
@@ -47,10 +49,14 @@
     }
     // Optimized targetLeft
     let targetLeft = 140 + colIndex * 260
-    if (targetLeft + width > innerWidth) {
+    if (boundingRect.x + width > innerWidth) {
       targetLeft = targetLeft - width - 30
     }
     pageStyle = `left: ${targetLeft}px; top: ${targetTop}px`
+  }
+
+  onMount(() => {
+    calculateAndSetLocation()
   })
 </script>
 
