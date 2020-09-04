@@ -8,7 +8,7 @@
   >
     <path
       d="M 2,8 8,2 14,8 8,14 Z"
-      style="fill:#0089be;stroke:#000000;stroke-width:0.18520833;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+      style="fill:#23b7e0;stroke:#000000;stroke-width:0.18520833;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
     ></path>
   </svg>
 
@@ -67,6 +67,7 @@
     height: $icon-height;
     width: $icon-height;
     display: block;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
     z-index: 2;
