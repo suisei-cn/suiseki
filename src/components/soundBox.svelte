@@ -11,7 +11,17 @@
   <p>Date: {sound.datetime}</p>
   <p>Performed by: {sound.performer}</p>
   <!-- svelte-ignore a11y-media-has-caption -->
-  <audio controls>
+  <audio
+    controls
+    on:playing="{(e) => {
+      console.log('PLAYING')
+      dispatch('keep')
+    }}"
+    on:pause="{(e) => {
+      console.log('CLOSE')
+      dispatch('close')
+    }}"
+  >
     <source src="{sound.url}" />
   </audio>
   <div class="close" on:click="{(e) => dispatch('close', { force: true })}">
@@ -20,37 +30,44 @@
 </div>
 
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher, getContext, onMount } from 'svelte'
   import type { Sound } from '../types'
 
   export let rowIndex: number
   export let colIndex: number
   export let sound: Sound
-  export let origin: HTMLElement
   let pageStyle = ''
   const dispatch = createEventDispatcher()
+  const targetBase: HTMLElement = getContext('timelines')
 
   function calculateAndSetLocation() {
     // Also update vairables.scss!
     const height = 180
     const width = 300
-    const titleHeight = 70
+    const songInfoHeight = 88
+    const titleHeight = 50
 
-    const boundingRect = origin.getBoundingClientRect()
-    const innerHeight = window.innerHeight
+    const bounding = targetBase.getBoundingClientRect()
+    const innerHeight = window.innerHeight - titleHeight
     const innerWidth = window.innerWidth
+    const xLenBeforeViewport = -1 * bounding.x
+    const yLenBeforeViewport = titleHeight - bounding.y
+    const xDiffDistance = 20
+    const yDiffDistance = -30
+    const edgeDistance = 15
+
     // Optimized targetTop
-    let targetTop = 60 + rowIndex * 140
-    if (targetTop + height > innerHeight) {
-      targetTop = innerHeight - height - 70
+    let targetTop = songInfoHeight + rowIndex * 140 + yDiffDistance
+    if (targetTop + height > yLenBeforeViewport + innerHeight) {
+      targetTop = yLenBeforeViewport + innerHeight - edgeDistance - height
+    } else if (targetTop - yLenBeforeViewport < songInfoHeight) {
+      targetTop = songInfoHeight + yLenBeforeViewport + edgeDistance
     }
-    if (targetTop < titleHeight) {
-      targetTop = titleHeight + 30
-    }
+
     // Optimized targetLeft
     let targetLeft = 140 + colIndex * 260
-    if (boundingRect.x + width > innerWidth) {
-      targetLeft = targetLeft - width - 30
+    if (targetLeft - xLenBeforeViewport + width > innerWidth) {
+      targetLeft = 140 + colIndex * 260 - xDiffDistance - width
     }
     pageStyle = `left: ${targetLeft}px; top: ${targetTop}px`
   }
@@ -67,8 +84,11 @@
     position: absolute;
     height: $dialog-height;
     width: $dialog-width;
-    background: aqua;
-    z-index: 1;
+    color: white;
+    background: #1f8ece;
+    z-index: 3;
     padding: 3px 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
   }
 </style>
