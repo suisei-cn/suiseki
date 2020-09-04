@@ -2,8 +2,8 @@
   <svg
     class="svgIcon"
     on:mouseout="{(e) => moveOutHandler()}"
-    on:mouseover="{moveInHandler}"
-    on:click="{(e) => (pagePermDisplay = true)}"
+    on:mouseover="{(e) => moveInHandler()}"
+    on:click="{(e) => (pagePermDisplayByUser = true)}"
     viewBox="0 0 16 16"
   >
     <path
@@ -13,13 +13,14 @@
   </svg>
 
   <Portal>
-    {#if pageTempDisplay || pagePermDisplay}
+    {#if pageDisplay}
       <SoundBox
         rowIndex="{rowIndex}"
         colIndex="{colIndex}"
         sound="{sound}"
-        on:keep="{moveInHandler}"
+        on:keep="{(e) => moveInHandler()}"
         on:close="{(e) => moveOutHandler(e?.detail?.force)}"
+        on:musicstatchange="{(e) => musicStatusHandler(e.detail.status)}"
       />
     {/if}
   </Portal>
@@ -35,9 +36,17 @@
   export let colIndex: number
   export let rowIndex: number
   let pageTempDisplay: boolean = false
-  let pagePermDisplay: boolean = false
+  let pagePermDisplayByUser: boolean = false
+  let pagePermDisplayByMusic: boolean = false
   let pageTempDisplayOverriden: boolean
   let pageStyle = ''
+
+  $: pageDisplay =
+    pageTempDisplay || pagePermDisplayByUser || pagePermDisplayByMusic
+
+  function musicStatusHandler(status: boolean) {
+    pagePermDisplayByMusic = status
+  }
 
   function moveInHandler() {
     pageTempDisplay = pageTempDisplayOverriden = true
@@ -45,7 +54,7 @@
 
   function moveOutHandler(force: boolean = false) {
     if (force) {
-      pageTempDisplay = pagePermDisplay = false
+      pageTempDisplay = pagePermDisplayByUser = pagePermDisplayByMusic = false
       return
     }
     pageTempDisplayOverriden = false

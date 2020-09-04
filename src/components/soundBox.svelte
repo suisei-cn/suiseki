@@ -14,12 +14,11 @@
   <audio
     controls
     on:playing="{(e) => {
-      console.log('PLAYING')
-      dispatch('keep')
+      dispatch('musicstatchange', { status: true })
     }}"
     on:pause="{(e) => {
       console.log('CLOSE')
-      dispatch('close')
+      dispatch('musicstatchange', { status: false })
     }}"
   >
     <source src="{sound.url}" />
