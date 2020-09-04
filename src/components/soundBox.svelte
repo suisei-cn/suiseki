@@ -33,13 +33,24 @@
     // Also update vairables.scss!
     const height = 180
     const width = 300
+    const titleHeight = 70
+
     const innerHeight = window.innerHeight
     const innerWidth = window.innerWidth
-    const targetTop = 60 + rowIndex * 140
-    const targetLeft = 140 + colIndex * 260
-    pageStyle = `left: ${targetLeft}px; top: ${
-      targetTop + height < innerHeight ? targetTop : innerHeight - height - 70
-    }px`
+    // Optimized targetTop
+    let targetTop = 60 + rowIndex * 140
+    if (targetTop + height > innerHeight) {
+      targetTop = innerHeight - height - 70
+    }
+    if (targetTop < titleHeight) {
+      targetTop = titleHeight + 30
+    }
+    // Optimized targetLeft
+    let targetLeft = 140 + colIndex * 260
+    if (targetLeft + width > innerWidth) {
+      targetLeft = targetLeft - width - 30
+    }
+    pageStyle = `left: ${targetLeft}px; top: ${targetTop}px`
   })
 </script>
 
