@@ -89,5 +89,14 @@
     padding: 3px 5px;
     border-radius: 5px;
     box-sizing: border-box;
+    overflow-y: scroll;
+  }
+
+  .close {
+    background: #60a8d2;
+    margin: 10px 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
   }
 </style>
