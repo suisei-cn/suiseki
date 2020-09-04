@@ -49,7 +49,7 @@
     text-align: center;
     position: sticky;
     top: 0;
-    z-index: 3;
+    z-index: 5;
     overflow: hidden;
 
     .name {

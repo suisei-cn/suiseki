@@ -41,7 +41,7 @@
 
   function calculateAndSetLocation() {
     // Also update vairables.scss!
-    const height = 180
+    const height = 200
     const width = 300
     const songInfoHeight = 88
     const titleHeight = 50
