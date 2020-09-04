@@ -1,7 +1,6 @@
 <div class="timeline">
   <h2 class="title">
-    <span>{title}</span>
-    <br />
+    <div class="name" class:nameMarquee bind:this="{titleDiv}">{title}</div>
     <small class="artist">{sounds[0].artist}</small>
   </h2>
   <div class="timelineBody">
@@ -20,7 +19,16 @@
   export let title: string
   export let index: number
 
-  onMount(async () => {})
+  let nameMarquee = false
+  let titleDiv: HTMLElement
+
+  function giveMarquee() {
+    nameMarquee = true
+  }
+
+  onMount(() => {
+    if (titleDiv.offsetWidth < titleDiv.scrollWidth) giveMarquee()
+  })
 </script>
 
 <style lang="scss">
@@ -35,14 +43,18 @@
     color: white;
     background: #1686b6;
     margin: 0;
-    padding-top: 0.4vh;
-    height: 9vh;
+    padding: 12px 6px 6px;
+    height: 70px;
     font-size: 1.3rem;
     text-align: center;
     position: sticky;
     top: 0;
     z-index: 3;
+    overflow: hidden;
 
+    .name {
+      white-space: nowrap;
+    }
     .artist {
       color: #ccc;
     }
@@ -61,5 +73,18 @@
     bottom: $timeline-height - ($icon-height / 2);
     left: 50%;
     margin-left: -2px;
+  }
+
+  .nameMarquee {
+    animation: marquee 6s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 </style>
