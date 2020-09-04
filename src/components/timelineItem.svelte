@@ -19,7 +19,7 @@
         colIndex="{colIndex}"
         sound="{sound}"
         on:keep="{moveInHandler}"
-        on:close="{(e) => moveOutHandler(e.detail.force)}"
+        on:close="{(e) => moveOutHandler(e?.detail?.force)}"
       />
     {/if}
   </Portal>
