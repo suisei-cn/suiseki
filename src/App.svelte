@@ -46,9 +46,11 @@
     margin: 0;
   }
 
+  @import './styles/variables.scss';
+
   #header {
-    height: 6vh;
-    line-height: calc(6vh - 8px);
+    height: $header-height;
+    line-height: calc(#{$header-height} - 8px);
     font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
@@ -59,7 +61,7 @@
 
   #container {
     overflow: scroll;
-    height: 94vh;
+    height: calc(100vh - #{$header-height});
     box-sizing: border-box;
   }
 
