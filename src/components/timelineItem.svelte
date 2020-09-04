@@ -1,8 +1,8 @@
 <div class="timelineItem">
   <svg
     class="svgIcon"
-    on:mouseout="{mouHandler}"
-    on:mouseover="{movHandler}"
+    on:mouseout="{(e) => moveOutHandler()}"
+    on:mouseover="{moveInHandler}"
     on:click="{(e) => (pagePermDisplay = true)}"
     viewBox="0 0 16 16"
   >
@@ -14,25 +14,13 @@
 
   <Portal>
     {#if pageTempDisplay || pagePermDisplay}
-      <div
-        class="page"
-        on:mouseout="{mouHandler}"
-        on:mouseover="{movHandler}"
-        style="{pageStyle}"
-      >
-        <p>Date: {sound.datetime}</p>
-        <p>Performed by: {sound.performer}</p>
-        <!-- svelte-ignore a11y-media-has-caption -->
-        <audio controls>
-          <source src="{sound.url}" />
-        </audio>
-        <div
-          class="close"
-          on:click="{(e) => (pageTempDisplay = pagePermDisplay = false)}"
-        >
-          CLOSE
-        </div>
-      </div>
+      <SoundBox
+        rowIndex="{rowIndex}"
+        colIndex="{colIndex}"
+        sound="{sound}"
+        on:keep="{moveInHandler}"
+        on:close="{(e) => moveOutHandler(e.detail.force)}"
+      />
     {/if}
   </Portal>
 </div>
@@ -41,6 +29,7 @@
   import { onMount } from 'svelte'
   import type { Sound } from '../types'
   import Portal from './portal.svelte'
+  import SoundBox from './soundBox.svelte'
 
   export let sound: Sound
   export let colIndex: number
@@ -50,30 +39,21 @@
   let pageTempDisplayOverriden: boolean
   let pageStyle = ''
 
-  function movHandler() {
+  function moveInHandler() {
     pageTempDisplay = pageTempDisplayOverriden = true
   }
 
-  function mouHandler() {
+  function moveOutHandler(force: boolean = false) {
+    if (force) {
+      pageTempDisplay = pagePermDisplay = false
+      return
+    }
     pageTempDisplayOverriden = false
     setTimeout(() => {
       if (pageTempDisplayOverriden) return
       pageTempDisplay = false
     }, 200)
   }
-
-  onMount(() => {
-    // Also update vairables.scss!
-    const height = 180
-    const width = 300
-    const innerHeight = window.innerHeight
-    const innerWidth = window.innerWidth
-    const targetTop = 60 + rowIndex * 140
-    const targetLeft = 140 + colIndex * 260
-    pageStyle = `left: ${targetLeft}px; top: ${
-      targetTop + height < innerHeight ? targetTop : innerHeight - height - 70
-    }px`
-  })
 </script>
 
 <style lang="scss">
@@ -90,14 +70,5 @@
     margin-left: auto;
     margin-right: auto;
     z-index: 2;
-  }
-
-  .page {
-    position: absolute;
-    height: $dialog-height;
-    width: $dialog-width;
-    background: aqua;
-    z-index: 1;
-    padding: 3px 5px;
   }
 </style>
