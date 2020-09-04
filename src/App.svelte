@@ -1,5 +1,5 @@
 <div id="app">
-  <header id="header">Suiseki</header>
+  <header id="header">Suiseki <small>/ 彗跡</small></header>
   <main id="container">
     <div id="timelines" bind:this="{timelines}">
       {#each starList as star, index}
