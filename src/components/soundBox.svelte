@@ -6,7 +6,7 @@
   on:mouseover="{(e) => {
     dispatch('keep')
   }}"
-  style="{pageStyle}"
+  style="left: {commitLeft}px; top: {commitTop}px;"
   bind:this="{pageElement}"
 >
   <p>Date: {dayjs(sound.datetime).format('YYYY/MM/DD HH:mm:ss')}</p>
@@ -31,7 +31,8 @@
   let pageElement: HTMLElement
   let pageStyle = ''
   const dispatch = createEventDispatcher()
-  const targetBase: HTMLElement = getContext('timelines')
+  let commitTop = 0
+  let commitLeft = 0
 
   function calculateAndSetLocation() {
     const titleHeight = pxify(getExportableVariableFromCSS('$header-height'))
@@ -77,7 +78,9 @@
     if (targetTop + height - yLenBeforeViewport > innerHeight) {
       targetTop = targetTop - 2 * yDiffDistance - height
     }
-    pageStyle = `left: ${targetLeft}px; top: ${targetTop}px`
+
+    commitTop = targetTop
+    commitLeft = targetLeft
   }
 
   function pushSong() {
