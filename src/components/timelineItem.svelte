@@ -76,7 +76,7 @@
     z-index: 2;
 
     path {
-      fill: #23b7e0;
+      fill: $connection-dot-color;
       fill-opacity: 1;
       stroke: #000;
       stroke-dasharray: none;
@@ -84,7 +84,7 @@
       stroke-linejoin: miter;
       stroke-miterlimit: 4;
       stroke-opacity: 1;
-      stroke-width: 0.18520833;
+      stroke-width: 0.19;
     }
   }
 </style>

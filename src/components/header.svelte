@@ -70,7 +70,7 @@
     margin: 0 5px;
 
     a {
-      color: #0e67b1;
+      color: $header-icon-color;
       font-size: 0.7em;
       margin: 0 3px;
       text-decoration: none;

@@ -40,9 +40,9 @@
 
   .title {
     align-items: center;
-    background: #1686b6;
+    background: $title-bar-color;
     box-sizing: border-box;
-    color: white;
+    color: $title-text-color;
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -58,7 +58,7 @@
     z-index: 5;
 
     .artist {
-      color: #ccc;
+      color: $title-text-sub-color;
     }
   }
 
@@ -74,7 +74,7 @@
   }
 
   .timelineBody::after {
-    background-color: #bbb;
+    background-color: $connection-line-color;
     content: '';
     height: $line-height;
     left: $timeline-block-width / 2;
