@@ -20,7 +20,6 @@
         sound="{sound}"
         on:keep="{(e) => moveInHandler()}"
         on:close="{(e) => moveOutHandler(e?.detail?.force)}"
-        on:musicstatchange="{(e) => musicStatusHandler(e.detail.status)}"
       />
     {/if}
   </Portal>
@@ -37,16 +36,10 @@
   export let rowIndex: number
   let pageTempDisplay: boolean = false
   let pagePermDisplayByUser: boolean = false
-  let pagePermDisplayByMusic: boolean = false
   let pageTempDisplayOverriden: boolean
   let pageStyle = ''
 
-  $: pageDisplay =
-    pageTempDisplay || pagePermDisplayByUser || pagePermDisplayByMusic
-
-  function musicStatusHandler(status: boolean) {
-    pagePermDisplayByMusic = status
-  }
+  $: pageDisplay = pageTempDisplay || pagePermDisplayByUser
 
   function moveInHandler() {
     pageTempDisplay = pageTempDisplayOverriden = true
@@ -54,7 +47,7 @@
 
   function moveOutHandler(force: boolean = false) {
     if (force) {
-      pageTempDisplay = pagePermDisplayByUser = pagePermDisplayByMusic = false
+      pageTempDisplay = pagePermDisplayByUser = false
       return
     }
     pageTempDisplayOverriden = false

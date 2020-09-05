@@ -10,22 +10,7 @@
 >
   <p>Date: {dayjs(sound.datetime).format('YYYY/MM/DD HH:mm:ss')}</p>
   <p>Performed by: {sound.performer}</p>
-  <!-- svelte-ignore a11y-media-has-caption -->
-  <audio
-    controls
-    on:playing="{(e) => {
-      dispatch('musicstatchange', { status: true })
-    }}"
-    on:pause="{(e) => {
-      console.log('CLOSE')
-      dispatch('musicstatchange', { status: false })
-    }}"
-  >
-    <source src="{sound.url}" />
-  </audio>
-  <div class="close" on:click="{(e) => dispatch('close', { force: true })}">
-    CLOSE
-  </div>
+  <div class="btn" on:click="{pushSong}">PUSH</div>
 </div>
 
 <script lang="ts">
@@ -72,6 +57,13 @@
     pageStyle = `left: ${targetLeft}px; top: ${targetTop}px`
   }
 
+  function pushSong() {
+    const evt = new CustomEvent('player', {
+      detail: sound,
+    })
+    window.dispatchEvent(evt)
+  }
+
   onMount(() => {
     calculateAndSetLocation()
   })
@@ -93,7 +85,7 @@
     overflow-y: scroll;
   }
 
-  .close {
+  .btn {
     background: #60a8d2;
     margin: 10px 10px;
     padding: 15px;

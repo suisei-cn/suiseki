@@ -7,6 +7,7 @@
       {/each}
     </div>
   </main>
+  <Aplayer />
 </div>
 
 <script lang="ts">
@@ -15,6 +16,7 @@
   import { categorizeSounds } from './components/soundProcessor'
   import type { Sound } from './types'
   import Timeline from './components/timeline.svelte'
+  import Aplayer from './components/aplayer.svelte'
 
   let starList: [string, Sound[]][] = []
   let timelines: HTMLElement
