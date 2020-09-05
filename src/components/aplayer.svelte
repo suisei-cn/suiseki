@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { onMount } from 'svelte'
+  import dayjs from 'dayjs'
   import APlayer from 'aplayer'
   import 'aplayer/dist/APlayer.min.css'
   import type { Sound } from '../types'
@@ -11,8 +12,9 @@
 
   function playerHandler(e: CustomEvent) {
     const d: Sound = e.detail
+    const day = dayjs(d.datetime)
     const v = player.list.add({
-      name: d.title,
+      name: `${d.title} (${day.format('YYYY/MM/DD')})`,
       artist: d.artist,
       url: d.url,
     })
