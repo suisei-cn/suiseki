@@ -47,6 +47,7 @@
     flex-shrink: 0;
     font-size: 1.3rem;
     justify-content: center;
+    left: 0;
     margin: 0;
     overflow: hidden;
     padding: 12px 6px 6px;
