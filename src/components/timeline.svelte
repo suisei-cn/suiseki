@@ -30,7 +30,7 @@
   @import '../styles/variables.scss';
 
   .timeline {
-    background: #126b91;
+    background: $background-color;
     display: flex;
     height: $timeline-height;
   }
