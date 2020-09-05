@@ -8,7 +8,7 @@
   }}"
   style="{pageStyle}"
 >
-  <p>Date: {sound.datetime}</p>
+  <p>Date: {dayjs(sound.datetime).format('YYYY/MM/DD HH:mm:ss')}</p>
   <p>Performed by: {sound.performer}</p>
   <!-- svelte-ignore a11y-media-has-caption -->
   <audio
@@ -31,6 +31,7 @@
 <script lang="ts">
   import { createEventDispatcher, getContext, onMount } from 'svelte'
   import type { Sound } from '../types'
+  import dayjs from 'dayjs'
 
   export let rowIndex: number
   export let colIndex: number
