@@ -8,12 +8,15 @@
 <script lang="ts">
   // src/components/Portal.svelte
   import { onMount, onDestroy, getContext } from 'svelte'
+  import { alwaysTry } from '../utils/utils'
   let target: HTMLElement
   let ref: HTMLElement
   let portal: HTMLElement
 
-  onMount(() => {
-    target = getContext('timelines')
+  onMount(async () => {
+    target = await alwaysTry(() => {
+      return getContext('timelines')
+    })
     portal = document.createElement('div')
     portal.className = 'portal'
     target.appendChild(portal)
