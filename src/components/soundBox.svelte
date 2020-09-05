@@ -10,7 +10,12 @@
 >
   <p>Date: {dayjs(sound.datetime).format('YYYY/MM/DD HH:mm:ss')}</p>
   <p>Performed by: {sound.performer}</p>
-  <div class="btn" on:click="{pushSong}">PUSH</div>
+  <div class="btns">
+    <div class="btn" on:click="{pushSong}">PUSH</div>
+    <div class="btn" on:click="{(e) => dispatch('close', { force: true })}">
+      CLOSE
+    </div>
+  </div>
 </div>
 
 <script lang="ts">
@@ -85,11 +90,16 @@
     overflow-y: scroll;
   }
 
+  .btns {
+    display: flex;
+  }
+
   .btn {
     background: #60a8d2;
     margin: 10px 10px;
     padding: 15px;
     text-align: center;
     cursor: pointer;
+    flex-grow: 1;
   }
 </style>
