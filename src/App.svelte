@@ -1,19 +1,8 @@
 <div id="app">
-  <header id="header">
-    <span>Suiseki <small>/ 彗跡</small></span>
-    <span class="urls">
-      <a href="https://twitter.com/suisei_hosimati"><i class="icon-twitter"></i></a>
-      <a href="https://www.youtube.com/channel/UC5CwaMl1eIgY8h02uZw7u8A"><i
-          class="icon-youtube"
-        ></i></a>
-      <a href="https://github.com/suisei-cn/suiseki"><i
-          class="icon-github1"
-        ></i></a>
-    </span>
-  </header>
+  <Header on:changed="{searchHandler}" />
   <main id="container">
     <div id="timelines" bind:this="{timelines}">
-      {#each starList as star, index}
+      {#each filteredStarList as star, index}
         <Timeline title="{star[0]}" sounds="{star[1]}" index="{index}" />
       {/each}
     </div>
@@ -28,9 +17,34 @@
   import type { Sound } from './types'
   import Timeline from './components/timeline.svelte'
   import Aplayer from './components/aplayer.svelte'
+  import Header from './components/header.svelte'
 
   let starList: [string, Sound[]][] = []
+  let filteredStarList: [string, Sound[]][] = []
   let timelines: HTMLElement
+  let currentFilterText = ''
+
+  function searchHandler(event: CustomEvent<any>) {
+    let text = (event?.detail?.filter as string) || ''
+    starListFilter(text)
+  }
+
+  function starListFilter(text: string) {
+    currentFilterText = text
+    text = text.replace(/^\s/, '').replace(/\s$/, '')
+    if (text.length > 0) {
+      text = text.toLowerCase()
+      filteredStarList = starList.filter((x) => {
+        const firstItem = x[1][0]
+        return (
+          firstItem.title.toLowerCase().includes(text) ||
+          firstItem.artist.toLowerCase().includes(text)
+        )
+      })
+    } else {
+      filteredStarList = starList
+    }
+  }
 
   onMount(async () => {
     setContext('timelines', timelines)
@@ -48,12 +62,13 @@
       .catch((e) => {
         console.error(e)
       })
+    filteredStarList = starList
     console.log(starList)
+    starListFilter(currentFilterText)
   })
 </script>
 
 <style lang="scss">
-  @import './styles/fontface.scss';
   @import './styles/variables.scss';
 
   /* stylelint-disable */
@@ -63,24 +78,6 @@
     margin: 0;
     overflow: hidden;
     background: $background-color;
-  }
-
-  #header {
-    background: #9a9ccc;
-    box-sizing: border-box;
-    font-size: 2rem;
-    height: $header-height;
-    letter-spacing: 0.1rem;
-    line-height: calc(#{$header-height} - 8px);
-    padding: 4px 8px;
-    text-transform: uppercase;
-  }
-
-  .urls a {
-    color: #0e67b1;
-    font-size: 0.7em;
-    margin-left: 5px;
-    text-decoration: none;
   }
 
   #container {
