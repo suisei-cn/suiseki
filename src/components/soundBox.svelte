@@ -111,10 +111,10 @@
   @import '../styles/variables.scss';
 
   .page {
-    background: #1f8ece;
+    background: $box-background-color;
     border-radius: 5px;
     box-sizing: border-box;
-    color: white;
+    color: $box-text-color;
     height: $dialog-height;
     overflow-y: scroll;
     padding: 3px 5px;
@@ -137,7 +137,7 @@
 
   // Indicator on the box
   .page::after {
-    background: #9cc8d9;
+    background: $box-indicator-color;
     content: '';
     height: $indicator-size;
     left: -1 * $indicator-size / 2;
@@ -161,7 +161,7 @@
   }
 
   .btn {
-    background: #60a8d2;
+    background: $box-button-background-color;
     cursor: pointer;
     flex-grow: 1;
     margin: 10px 10px;
