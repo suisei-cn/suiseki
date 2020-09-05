@@ -20,9 +20,10 @@
 </div>
 
 <script lang="ts">
-  import { createEventDispatcher, getContext, onMount } from 'svelte'
+  import { createEventDispatcher, onMount } from 'svelte'
   import type { Sound } from '../types'
   import dayjs from 'dayjs'
+  import { getTimelines } from '../utils/utils'
 
   export let soundIndex: number
   export let revIndex: number
@@ -46,7 +47,7 @@
       getExportableVariableFromCSS('$title-block-width')
     )
 
-    const bounding = targetBase.getBoundingClientRect()
+    const bounding = getTimelines().getBoundingClientRect()
     const innerHeight = window.innerHeight - titleHeight
     const innerWidth = window.innerWidth - titleBlockWidth
     const xLenBeforeViewport = -1 * bounding.x

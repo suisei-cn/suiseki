@@ -19,7 +19,7 @@
 </div>
 
 <script lang="ts">
-  import { onMount, setContext } from 'svelte'
+  import { onMount } from 'svelte'
   import config from './config'
   import { categorizeSounds } from './components/soundProcessor'
   import type { Sound } from './types'
@@ -57,7 +57,6 @@
   }
 
   onMount(async () => {
-    setContext('timelines', timelines)
     await fetch(config.SOUNDS_URL)
       .then((x) => x.json())
       .then((x) => {
