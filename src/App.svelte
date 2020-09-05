@@ -1,5 +1,16 @@
 <div id="app">
-  <header id="header">Suiseki <small>/ 彗跡</small></header>
+  <header id="header">
+    <span>Suiseki <small>/ 彗跡</small></span>
+    <span class="urls">
+      <a href="https://twitter.com/suisei_hosimati"><i class="icon-twitter"></i></a>
+      <a href="https://www.youtube.com/channel/UC5CwaMl1eIgY8h02uZw7u8A"><i
+          class="icon-youtube"
+        ></i></a>
+      <a href="https://github.com/suisei-cn/suiseki"><i
+          class="icon-github1"
+        ></i></a>
+    </span>
+  </header>
   <main id="container">
     <div id="timelines" bind:this="{timelines}">
       {#each starList as star, index}
@@ -42,6 +53,8 @@
 </script>
 
 <style lang="scss">
+  @import './styles/fontface.scss';
+
   :global(body) {
     height: 100vh;
     overflow: hidden;
@@ -59,6 +72,13 @@
     background: #9a9ccc;
     padding: 4px 8px;
     box-sizing: border-box;
+  }
+
+  .urls a {
+    text-decoration: none;
+    color: #0e67b1;
+    font-size: 0.7em;
+    margin-left: 5px;
   }
 
   #container {
