@@ -85,10 +85,10 @@
   /* stylelint-disable */
   :global(body) {
     /* stylelint-enable */
+    background: $background-color;
     height: 100vh;
     margin: 0;
     overflow: hidden;
-    background: $background-color;
   }
 
   #container {
