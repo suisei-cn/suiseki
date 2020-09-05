@@ -6,10 +6,7 @@
     on:click="{(e) => (pagePermDisplayByUser = true)}"
     viewBox="0 0 16 16"
   >
-    <path
-      d="M 2,8 8,2 14,8 8,14 Z"
-      style="fill:#23b7e0;stroke:#000000;stroke-width:0.18520833;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-    ></path>
+    <path d="M 2,8 8,2 14,8 8,14 Z"></path>
   </svg>
 
   <Portal>
@@ -66,14 +63,26 @@
   }
 
   .svgIcon {
-    height: $icon-height;
-    width: $icon-height;
     display: block;
-    position: relative;
-    margin-top: ($timeline-height / 2) - ($icon-height / 2);
+    height: $icon-height;
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
+    margin-top: ($timeline-height / 2) - ($icon-height / 2);
+    position: relative;
+    width: $icon-height;
     z-index: 2;
+
+    path {
+      fill: #23b7e0;
+      fill-opacity: 1;
+      stroke: #000;
+      stroke-dasharray: none;
+      stroke-linecap: butt;
+      stroke-linejoin: miter;
+      stroke-miterlimit: 4;
+      stroke-opacity: 1;
+      stroke-width: 0.18520833;
+    }
   }
 </style>

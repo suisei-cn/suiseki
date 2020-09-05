@@ -26,43 +26,44 @@
   @import '../styles/variables.scss';
 
   .timeline {
-    height: $timeline-height;
     background: #126b91;
     display: flex;
+    height: $timeline-height;
   }
 
   .title {
-    color: white;
+    align-items: center;
     background: #1686b6;
-    margin: 0;
-    padding: 12px 6px 6px;
-    font-size: 1.3rem;
-    text-align: center;
-    position: sticky;
-    width: 200px;
-    z-index: 5;
-    overflow: hidden;
+    box-sizing: border-box;
+    color: white;
     display: flex;
     flex-direction: column;
+    font-size: 1.3rem;
     justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+    margin: 0;
+    overflow: hidden;
+    padding: 12px 6px 6px;
+    position: sticky;
+    text-align: center;
+    width: 200px;
+    z-index: 5;
+
     .artist {
       color: #ccc;
     }
   }
 
   .timelineBody {
-    position: relative;
     display: flex;
+    position: relative;
   }
 
-  .timelineBody:after {
-    content: '';
-    position: absolute;
-    height: $line-height;
+  .timelineBody::after {
     background-color: #bbb;
+    content: '';
+    height: $line-height;
     left: $timeline-block-width / 2;
+    position: absolute;
     right: $timeline-block-width / 2;
     top: ($timeline-height - $line-height) / 2;
   }

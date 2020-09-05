@@ -78,16 +78,16 @@
   @import '../styles/variables.scss';
 
   .page {
-    position: absolute;
-    height: $dialog-height;
-    width: $dialog-width;
-    color: white;
     background: #1f8ece;
-    z-index: 3;
-    padding: 3px 5px;
     border-radius: 5px;
     box-sizing: border-box;
+    color: white;
+    height: $dialog-height;
     overflow-y: scroll;
+    padding: 3px 5px;
+    position: absolute;
+    width: $dialog-width;
+    z-index: 3;
   }
 
   .btns {
@@ -96,10 +96,10 @@
 
   .btn {
     background: #60a8d2;
+    cursor: pointer;
+    flex-grow: 1;
     margin: 10px 10px;
     padding: 15px;
     text-align: center;
-    cursor: pointer;
-    flex-grow: 1;
   }
 </style>

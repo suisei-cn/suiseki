@@ -55,36 +55,38 @@
 <style lang="scss">
   @import './styles/fontface.scss';
 
+  /* stylelint-disable */
   :global(body) {
+    /* stylelint-enable */
     height: 100vh;
-    overflow: hidden;
     margin: 0;
+    overflow: hidden;
   }
 
   @import './styles/variables.scss';
 
   #header {
-    height: $header-height;
-    line-height: calc(#{$header-height} - 8px);
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
     background: #9a9ccc;
-    padding: 4px 8px;
     box-sizing: border-box;
+    font-size: 2rem;
+    height: $header-height;
+    letter-spacing: 0.1rem;
+    line-height: calc(#{$header-height} - 8px);
+    padding: 4px 8px;
+    text-transform: uppercase;
   }
 
   .urls a {
-    text-decoration: none;
     color: #0e67b1;
     font-size: 0.7em;
     margin-left: 5px;
+    text-decoration: none;
   }
 
   #container {
-    overflow: scroll;
-    height: calc(100vh - #{$header-height});
     box-sizing: border-box;
+    height: calc(100vh - #{$header-height});
+    overflow: scroll;
   }
 
   #timelines {
