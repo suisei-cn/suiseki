@@ -62,7 +62,7 @@
   @import '../styles/variables.scss';
 
   .timelineItem {
-    height: $timeline-height;
+    width: $timeline-block-width;
   }
 
   .svgIcon {
@@ -70,6 +70,8 @@
     width: $icon-height;
     display: block;
     position: relative;
+    margin-top: ($timeline-height / 2) - ($icon-height / 2);
+    margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
     z-index: 2;
