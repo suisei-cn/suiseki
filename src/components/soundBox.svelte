@@ -119,6 +119,7 @@
 
     // Exported styles
     // I know it's weird but...
+
     --header-height: #{$header-height};
     --timeline-height: #{$timeline-height};
     --timeline-block-width: #{$timeline-block-width};

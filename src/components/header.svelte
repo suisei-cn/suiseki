@@ -68,6 +68,7 @@
 
   .urls {
     margin: 0 5px;
+
     a {
       color: #0e67b1;
       font-size: 0.7em;

@@ -104,11 +104,11 @@
   }
 
   #loading {
+    color: #fff8;
+    font-size: 3rem;
+    left: 50%;
     position: fixed;
     top: 50%;
-    left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    font-size: 3rem;
-    color: #fff8;
   }
 </style>
