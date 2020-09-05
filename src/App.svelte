@@ -5,6 +5,10 @@
       {#each filteredStarList as star, index}
         <Timeline title="{star[0]}" sounds="{star[1]}" index="{index}" />
       {/each}
+      <FinalBlock
+        cnt="{filteredStarList.length}"
+        originalCnt="{starList.length}"
+      />
     </div>
   </main>
   <Aplayer />
@@ -18,6 +22,7 @@
   import Timeline from './components/timeline.svelte'
   import Aplayer from './components/aplayer.svelte'
   import Header from './components/header.svelte'
+  import FinalBlock from './components/finalBlock.svelte'
 
   let starList: [string, Sound[]][] = []
   let filteredStarList: [string, Sound[]][] = []
