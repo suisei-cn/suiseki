@@ -13,6 +13,17 @@
           sound="{sound}"
           parentScroller="{bodyElement}"
         />
+        {#if rowIndex > 0}
+          {#if getDateFormat(sounds[rowIndex]) !== getDateFormat(sounds[rowIndex - 1])}
+            <Notation rowIndex="{rowIndex}">
+              {getDateFormat(sounds[rowIndex])}
+            </Notation>
+          {/if}
+        {:else}
+          <Notation rowIndex="{rowIndex}">
+            {getDateFormat(sounds[rowIndex])}
+          </Notation>
+        {/if}
       {/each}
     </div>
   </div>
@@ -21,6 +32,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import TimelineItem from './timelineItem.svelte'
+  import Notation from './notation.svelte'
   import type { Sound } from '../types'
   import dayjs from 'dayjs'
 
@@ -30,6 +42,10 @@
 
   let debutDate = dayjs(sounds[0].datetime).format('YYYY/MM/DD')
   let bodyElement: HTMLElement
+
+  function getDateFormat(s: Sound): string {
+    return dayjs(s.datetime).format('YYYY/MM')
+  }
 </script>
 
 <style lang="scss">

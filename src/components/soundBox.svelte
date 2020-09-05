@@ -25,7 +25,7 @@
   import { createEventDispatcher, onMount } from 'svelte'
   import type { Sound } from '../types'
   import dayjs from 'dayjs'
-  import { getTimelines } from '../utils/utils'
+  import { getTimelines, pxify } from '../utils/utils'
 
   export let soundIndex: number
   export let revIndex: number
@@ -92,16 +92,11 @@
   }
 
   // C o m p l e t e  V i c t o r y
-  function getExportableVariableFromCSS(name: string): string {
+  function getExportableVariableFromCSS(name: string) {
     return getComputedStyle(pageElement).getPropertyValue(
       '--' + name.replace('$', '')
     )
   }
-
-  function pxify(px: string): number {
-    return Number(px.replace('px', ''))
-  }
-
   onMount(() => {
     calculateAndSetLocation()
   })
