@@ -54,6 +54,7 @@
 
 <style lang="scss">
   @import './styles/fontface.scss';
+  @import './styles/variables.scss';
 
   /* stylelint-disable */
   :global(body) {
@@ -61,9 +62,8 @@
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    background: $background-color;
   }
-
-  @import './styles/variables.scss';
 
   #header {
     background: #9a9ccc;
