@@ -25,13 +25,7 @@
     player = new APlayer({
       container: playerContainer,
       fixed: true,
-      audio: [
-        {
-          url: 'https://static.suisei.moe/music/3444b6c806697ec6.m4a',
-          name: 'NEXT COLOR PLANET',
-          artist: '星街すいせい',
-        },
-      ],
+      audio: [],
     })
     window.addEventListener('player', playerHandler)
   })
