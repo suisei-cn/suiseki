@@ -12,8 +12,8 @@
   <Portal>
     {#if pageDisplay}
       <SoundBox
-        rowIndex="{rowIndex}"
-        colIndex="{colIndex}"
+        soundIndex="{soundIndex}"
+        revIndex="{revIndex}"
         sound="{sound}"
         on:keep="{(e) => moveInHandler()}"
         on:close="{(e) => moveOutHandler(e?.detail?.force)}"
@@ -29,8 +29,8 @@
   import SoundBox from './soundBox.svelte'
 
   export let sound: Sound
-  export let colIndex: number
-  export let rowIndex: number
+  export let soundIndex: number
+  export let revIndex: number
   let pageTempDisplay: boolean = false
   let pagePermDisplayByUser: boolean = false
   let pageTempDisplayOverriden: boolean

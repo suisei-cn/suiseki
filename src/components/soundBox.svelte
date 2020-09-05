@@ -7,6 +7,7 @@
     dispatch('keep')
   }}"
   style="{pageStyle}"
+  bind:this="{pageElement}"
 >
   <p>Date: {dayjs(sound.datetime).format('YYYY/MM/DD HH:mm:ss')}</p>
   <p>Performed by: {sound.performer}</p>
@@ -23,41 +24,57 @@
   import type { Sound } from '../types'
   import dayjs from 'dayjs'
 
-  export let rowIndex: number
-  export let colIndex: number
+  export let soundIndex: number
+  export let revIndex: number
   export let sound: Sound
+  let pageElement: HTMLElement
   let pageStyle = ''
   const dispatch = createEventDispatcher()
   const targetBase: HTMLElement = getContext('timelines')
 
   function calculateAndSetLocation() {
-    // Also update vairables.scss!
-    const height = 200
-    const width = 300
-    const songInfoHeight = 88
-    const titleHeight = 50
+    const titleHeight = pxify(getExportableVariableFromCSS('$header-height'))
+    const timelineHeight = pxify(
+      getExportableVariableFromCSS('$timeline-height')
+    )
+    const timelineBlockWidth = pxify(
+      getExportableVariableFromCSS('$timeline-block-width')
+    )
+    const height = pxify(getExportableVariableFromCSS('$dialog-height'))
+    const width = pxify(getExportableVariableFromCSS('$dialog-width'))
+    const titleBlockWidth = pxify(
+      getExportableVariableFromCSS('$title-block-width')
+    )
 
     const bounding = targetBase.getBoundingClientRect()
     const innerHeight = window.innerHeight - titleHeight
-    const innerWidth = window.innerWidth
+    const innerWidth = window.innerWidth - titleBlockWidth
     const xLenBeforeViewport = -1 * bounding.x
     const yLenBeforeViewport = titleHeight - bounding.y
-    const xDiffDistance = 20
-    const yDiffDistance = -30
+    const xDiffDistance = -0.44 * width
+    const yDiffDistance = 20
     const edgeDistance = 15
 
-    // Optimized targetTop
-    let targetTop = songInfoHeight + rowIndex * 140 + yDiffDistance
-    if (targetTop + height > yLenBeforeViewport + innerHeight) {
-      targetTop = yLenBeforeViewport + innerHeight - edgeDistance - height
-    } else if (targetTop - yLenBeforeViewport < songInfoHeight) {
-      targetTop = songInfoHeight + yLenBeforeViewport + edgeDistance
+    // targetTop and targetLeft should be related to .timelines
+    let targetTop = (soundIndex + 0.5) * timelineHeight + yDiffDistance
+    let targetLeft =
+      titleBlockWidth + (revIndex + 0.5) * timelineBlockWidth + xDiffDistance
+
+    // Right overflow
+    if (targetLeft + width - xLenBeforeViewport > innerWidth) {
+      targetLeft = innerWidth + xLenBeforeViewport - width - edgeDistance
     }
 
-    // Optimized targetLeft
-    let targetLeft = 140 + colIndex * 260
-    if (targetLeft - xLenBeforeViewport + width > innerWidth) {
-      targetLeft = 140 + colIndex * 260 - xDiffDistance - width
+    // Left overflow
+    if (targetLeft - xLenBeforeViewport < titleBlockWidth) {
+      targetLeft = xLenBeforeViewport + edgeDistance + titleBlockWidth
+    }
+
+    // Top overflow (No!)
+
+    // Bottom overflow
+    if (targetTop + height - yLenBeforeViewport > innerHeight) {
+      targetTop = targetTop - 2 * yDiffDistance - height
     }
     pageStyle = `left: ${targetLeft}px; top: ${targetTop}px`
   }
@@ -67,6 +84,17 @@
       detail: sound,
     })
     window.dispatchEvent(evt)
+  }
+
+  // C o m p l e t e  V i c t o r y
+  function getExportableVariableFromCSS(name: string): string {
+    return getComputedStyle(pageElement).getPropertyValue(
+      '--' + name.replace('$', '')
+    )
+  }
+
+  function pxify(px: string): number {
+    return Number(px.replace('px', ''))
   }
 
   onMount(() => {
@@ -88,6 +116,17 @@
     position: absolute;
     width: $dialog-width;
     z-index: 3;
+
+    // Exported styles
+    // I know it's weird but...
+    --header-height: #{$header-height};
+    --timeline-height: #{$timeline-height};
+    --timeline-block-width: #{$timeline-block-width};
+    --icon-height: #{$icon-height};
+    --line-height: #{$line-height};
+    --dialog-height: #{$dialog-height};
+    --dialog-width: #{$dialog-width};
+    --title-block-width: #{$title-block-width};
   }
 
   .btns {

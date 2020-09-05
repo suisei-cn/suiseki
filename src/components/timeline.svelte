@@ -5,7 +5,11 @@
   </h2>
   <div class="timelineBody">
     {#each sounds as sound, rowIndex}
-      <TimelineItem colIndex="{index}" rowIndex="{rowIndex}" sound="{sound}" />
+      <TimelineItem
+        soundIndex="{index}"
+        revIndex="{rowIndex}"
+        sound="{sound}"
+      />
     {/each}
   </div>
 </div>
@@ -45,7 +49,7 @@
     padding: 12px 6px 6px;
     position: sticky;
     text-align: center;
-    width: 200px;
+    width: $title-block-width;
     z-index: 5;
 
     .artist {
