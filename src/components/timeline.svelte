@@ -1,7 +1,8 @@
 <div class="timeline">
   <h2 class="title">
     <div class="name">{title}</div>
-    <small class="artist">{sounds[0].artist}</small>
+    <small class="sub">{sounds[0].artist}</small>
+    <small class="sub">Since {debutDate}</small>
   </h2>
   <div class="timelineBodyContainer">
     <div class="timelineBody" bind:this="{bodyElement}">
@@ -21,11 +22,13 @@
   import { onMount } from 'svelte'
   import TimelineItem from './timelineItem.svelte'
   import type { Sound } from '../types'
+  import dayjs from 'dayjs'
 
   export let sounds: Sound[]
   export let title: string
   export let index: number
 
+  let debutDate = dayjs(sounds[0].datetime).format('YYYY/MM/DD')
   let bodyElement: HTMLElement
 </script>
 
@@ -50,14 +53,14 @@
     justify-content: center;
     left: 0;
     margin: 0;
-    overflow: hidden;
+    overflow: scroll;
     padding: 12px 6px 6px;
     position: sticky;
     text-align: center;
     width: $title-block-width;
     z-index: 5;
 
-    .artist {
+    .sub {
       color: $title-text-sub-color;
     }
   }
