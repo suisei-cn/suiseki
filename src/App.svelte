@@ -1,17 +1,21 @@
 <div id="app">
   <Header on:changed="{searchHandler}" />
-  <main id="container">
-    <div id="timelines" bind:this="{timelines}">
-      {#each filteredStarList as star, index}
-        <Timeline title="{star[0]}" sounds="{star[1]}" index="{index}" />
-      {/each}
-      <FinalBlock
-        cnt="{filteredStarList.length}"
-        originalCnt="{starList.length}"
-      />
-    </div>
-  </main>
-  <Aplayer />
+  {#if loadOK}
+    <main id="container">
+      <div id="timelines" bind:this="{timelines}">
+        {#each filteredStarList as star, index}
+          <Timeline title="{star[0]}" sounds="{star[1]}" index="{index}" />
+        {/each}
+        <FinalBlock
+          cnt="{filteredStarList.length}"
+          originalCnt="{starList.length}"
+        />
+      </div>
+    </main>
+    <Aplayer />
+  {:else}
+    <div id="loading">Loading...</div>
+  {/if}
 </div>
 
 <script lang="ts">
@@ -28,6 +32,7 @@
   let filteredStarList: [string, Sound[]][] = []
   let timelines: HTMLElement
   let currentFilterText = ''
+  let loadOK = false
 
   function searchHandler(event: CustomEvent<any>) {
     let text = (event?.detail?.filter as string) || ''
@@ -70,6 +75,7 @@
     filteredStarList = starList
     console.log(starList)
     starListFilter(currentFilterText)
+    loadOK = true
   })
 </script>
 
@@ -95,5 +101,14 @@
     display: flex;
     flex-direction: column;
     position: relative;
+  }
+
+  #loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 3rem;
+    color: #fff8;
   }
 </style>
