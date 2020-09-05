@@ -3,6 +3,7 @@
     <div class="name" bind:this="{titleDiv}">{title}</div>
     <small class="artist">{sounds[0].artist}</small>
   </h2>
+  <!-- <div class="timelineBodyContainer"> -->
   <div class="timelineBody">
     {#each sounds as sound, rowIndex}
       <TimelineItem
@@ -12,6 +13,7 @@
       />
     {/each}
   </div>
+  <!-- </div> -->
 </div>
 
 <script lang="ts">
@@ -42,6 +44,7 @@
     color: white;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     font-size: 1.3rem;
     justify-content: center;
     margin: 0;
@@ -55,6 +58,12 @@
     .artist {
       color: #ccc;
     }
+  }
+
+  .timelineBodyContainer {
+    display: flex;
+    overflow-y: scroll;
+    width: calc(100vw - #{$title-block-width});
   }
 
   .timelineBody {

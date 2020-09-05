@@ -1,19 +1,23 @@
-<header id="header">
-  <div>Suiseki <small>/ 彗跡</small></div>
-  <div class="urls">
-    <a href="https://twitter.com/suisei_hosimati"><i class="icon-twitter"></i></a>
-    <a href="https://www.youtube.com/channel/UC5CwaMl1eIgY8h02uZw7u8A"><i
-        class="icon-youtube"
-      ></i></a>
-    <a href="https://github.com/suisei-cn/suiseki"><i class="icon-github1"></i></a>
+<header id="headerContainer">
+  <div id="header">
+    <div>Suiseki <small>/ 彗跡</small></div>
+    <div class="urls">
+      <a href="https://twitter.com/suisei_hosimati"><i class="icon-twitter"></i></a>
+      <a href="https://www.youtube.com/channel/UC5CwaMl1eIgY8h02uZw7u8A"><i
+          class="icon-youtube"
+        ></i></a>
+      <a href="https://github.com/suisei-cn/suiseki"><i
+          class="icon-github1"
+        ></i></a>
+    </div>
+    <input
+      id="inputFilter"
+      type="text"
+      placeholder="Filter by title/artist..."
+      bind:value="{titleFilter}"
+      on:input="{updateFilter}"
+    />
   </div>
-  <input
-    id="inputFilter"
-    type="text"
-    placeholder="Filter by title/artist..."
-    bind:value="{titleFilter}"
-    on:input="{updateFilter}"
-  />
 </header>
 
 <script lang="ts">
@@ -40,9 +44,15 @@
   @import '../styles/variables.scss';
   @import '../styles/fontface.scss';
 
+  #headerContainer {
+    background: $header-background;
+    display: flex;
+    overflow-y: scroll;
+    width: 100vw;
+  }
+
   #header {
     align-items: center;
-    background: #9a9ccc;
     box-sizing: border-box;
     display: flex;
     font-size: 2rem;
@@ -50,6 +60,10 @@
     letter-spacing: 0.1rem;
     padding: 4px 8px;
     text-transform: uppercase;
+
+    & > * {
+      flex-shrink: 0;
+    }
   }
 
   .urls {
@@ -63,6 +77,6 @@
   }
 
   #inputFilter {
-    margin-left: 4px;
+    margin: 0 14px;
   }
 </style>

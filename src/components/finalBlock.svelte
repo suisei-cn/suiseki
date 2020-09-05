@@ -25,6 +25,12 @@
     text-align: center;
   }
 
+  @media (max-width: 550px) {
+    .block {
+      flex-direction: column;
+    }
+  }
+
   .part {
     align-items: center;
     display: flex;
