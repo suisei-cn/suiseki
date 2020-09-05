@@ -1,19 +1,20 @@
 <div class="timeline">
   <h2 class="title">
-    <div class="name" bind:this="{titleDiv}">{title}</div>
+    <div class="name">{title}</div>
     <small class="artist">{sounds[0].artist}</small>
   </h2>
-  <!-- <div class="timelineBodyContainer"> -->
-  <div class="timelineBody">
-    {#each sounds as sound, rowIndex}
-      <TimelineItem
-        soundIndex="{index}"
-        revIndex="{rowIndex}"
-        sound="{sound}"
-      />
-    {/each}
+  <div class="timelineBodyContainer">
+    <div class="timelineBody" bind:this="{bodyElement}">
+      {#each sounds as sound, rowIndex}
+        <TimelineItem
+          soundIndex="{index}"
+          revIndex="{rowIndex}"
+          sound="{sound}"
+          parentScroller="{bodyElement}"
+        />
+      {/each}
+    </div>
   </div>
-  <!-- </div> -->
 </div>
 
 <script lang="ts">
@@ -25,7 +26,7 @@
   export let title: string
   export let index: number
 
-  let titleDiv: HTMLElement
+  let bodyElement: HTMLElement
 </script>
 
 <style lang="scss">

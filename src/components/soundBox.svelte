@@ -1,5 +1,7 @@
 <div
   class="page"
+  class:lb="{boxLB}"
+  class:rt="{boxRT}"
   on:mouseout="{(e) => {
     dispatch('close')
   }}"
@@ -28,13 +30,17 @@
   export let soundIndex: number
   export let revIndex: number
   export let sound: Sound
+  export let parentScroller: HTMLElement
   let pageElement: HTMLElement
   let pageStyle = ''
   const dispatch = createEventDispatcher()
   let commitTop = 0
   let commitLeft = 0
+  let boxLB = false
+  let boxRT = false
 
   function calculateAndSetLocation() {
+    boxLB = boxRT = false
     const titleHeight = pxify(getExportableVariableFromCSS('$header-height'))
     const timelineHeight = pxify(
       getExportableVariableFromCSS('$timeline-height')
@@ -48,35 +54,30 @@
       getExportableVariableFromCSS('$title-block-width')
     )
 
-    const bounding = getTimelines().getBoundingClientRect()
     const innerHeight = window.innerHeight - titleHeight
-    const innerWidth = window.innerWidth - titleBlockWidth
-    const xLenBeforeViewport = -1 * bounding.x
-    const yLenBeforeViewport = titleHeight - bounding.y
-    const xDiffDistance = -0.44 * width
-    const yDiffDistance = 20
-    const edgeDistance = 15
+    const innerWidth = parentScroller.parentElement.getBoundingClientRect()
+      .width
+    const xLenBeforeViewport = parentScroller.getBoundingClientRect().x
+    const yLenBeforeViewport =
+      titleHeight - getTimelines().getBoundingClientRect().y
+    const xDiffDistance = 10
+    const yDiffDistance = 10
 
     // targetTop and targetLeft should be related to .timelines
     let targetTop = (soundIndex + 0.5) * timelineHeight + yDiffDistance
     let targetLeft =
-      titleBlockWidth + (revIndex + 0.5) * timelineBlockWidth + xDiffDistance
+      (revIndex + 0.5) * timelineBlockWidth + xLenBeforeViewport + xDiffDistance
 
     // Right overflow
-    if (targetLeft + width - xLenBeforeViewport > innerWidth) {
-      targetLeft = innerWidth + xLenBeforeViewport - width - edgeDistance
+    if (targetLeft + width - titleBlockWidth > innerWidth) {
+      targetLeft -= width + 2 * xDiffDistance
+      boxRT = true
     }
-
-    // Left overflow
-    if (targetLeft - xLenBeforeViewport < titleBlockWidth) {
-      targetLeft = xLenBeforeViewport + edgeDistance + titleBlockWidth
-    }
-
-    // Top overflow (No!)
 
     // Bottom overflow
     if (targetTop + height - yLenBeforeViewport > innerHeight) {
-      targetTop = targetTop - 2 * yDiffDistance - height
+      targetTop -= height + 2 * yDiffDistance
+      boxLB = true
     }
 
     commitTop = targetTop
@@ -132,6 +133,27 @@
     --dialog-height: #{$dialog-height};
     --dialog-width: #{$dialog-width};
     --title-block-width: #{$title-block-width};
+  }
+
+  // Indicator on the box
+  .page::after {
+    background: #9cc8d9;
+    content: '';
+    height: $indicator-size;
+    left: -1 * $indicator-size / 2;
+    position: absolute;
+    top: -1 * $indicator-size / 2;
+    width: $indicator-size;
+  }
+
+  .page.rt::after {
+    left: unset;
+    right: -1 * $indicator-size / 2;
+  }
+
+  .page.lb::after {
+    bottom: -1 * $indicator-size / 2;
+    top: unset;
   }
 
   .btns {

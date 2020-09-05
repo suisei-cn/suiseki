@@ -17,6 +17,7 @@
         sound="{sound}"
         on:keep="{(e) => moveInHandler()}"
         on:close="{(e) => moveOutHandler(e?.detail?.force)}"
+        parentScroller="{parentScroller}"
       />
     {/if}
   </Portal>
@@ -31,6 +32,7 @@
   export let sound: Sound
   export let soundIndex: number
   export let revIndex: number
+  export let parentScroller: HTMLElement
   let pageTempDisplay: boolean = false
   let pagePermDisplayByUser: boolean = false
   let pageTempDisplayOverriden: boolean
