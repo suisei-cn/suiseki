@@ -14,9 +14,9 @@
   <p>Date: {dayjs(sound.datetime).format('YYYY/MM/DD HH:mm:ss')}</p>
   <p>Performed by: {sound.performer}</p>
   <div class="btns">
-    <div class="btn" on:click="{pushSong}">PUSH</div>
+    <div class="btn" on:click="{pushSong}">Add</div>
     <div class="btn" on:click="{(e) => dispatch('close', { force: true })}">
-      CLOSE
+      Close
     </div>
   </div>
 </div>
@@ -111,7 +111,7 @@
     box-sizing: border-box;
     color: $box-text-color;
     height: $dialog-height;
-    overflow-y: scroll;
+    overflow: hidden auto;
     padding: 3px 5px;
     position: absolute;
     width: $dialog-width;
