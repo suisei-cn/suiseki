@@ -47,7 +47,7 @@
   #headerContainer {
     background: $header-background;
     display: flex;
-    overflow-y: scroll;
+    overflow: auto hidden;
     width: 100vw;
   }
 

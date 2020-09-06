@@ -93,7 +93,7 @@
   #container {
     box-sizing: border-box;
     height: calc(100vh - #{$header-height});
-    overflow: scroll;
+    overflow-y: auto;
   }
 
   #timelines {

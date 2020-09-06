@@ -69,7 +69,7 @@
     justify-content: center;
     left: 0;
     margin: 0;
-    overflow: scroll;
+    overflow: hidden auto;
     padding: 12px 6px 6px;
     position: sticky;
     text-align: center;
@@ -83,7 +83,7 @@
 
   .timelineBodyContainer {
     display: flex;
-    overflow-y: scroll;
+    overflow: auto hidden;
     width: calc(100vw - #{$title-block-width});
   }
 
