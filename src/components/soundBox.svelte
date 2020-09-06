@@ -48,8 +48,8 @@
     const timelineBlockWidth = pxify(
       getExportableVariableFromCSS('$timeline-block-width')
     )
-    const height = pxify(getExportableVariableFromCSS('$dialog-height'))
-    const width = pxify(getExportableVariableFromCSS('$dialog-width'))
+    const height = pageElement.getBoundingClientRect().height
+    const width = pageElement.getBoundingClientRect().width
     const titleBlockWidth = pxify(
       getExportableVariableFromCSS('$title-block-width')
     )
@@ -110,7 +110,6 @@
     border-radius: 5px;
     box-sizing: border-box;
     color: $box-text-color;
-    height: $dialog-height;
     overflow: hidden auto;
     padding: 3px 5px;
     position: absolute;
@@ -125,8 +124,6 @@
     --timeline-block-width: #{$timeline-block-width};
     --icon-height: #{$icon-height};
     --line-height: #{$line-height};
-    --dialog-height: #{$dialog-height};
-    --dialog-width: #{$dialog-width};
     --title-block-width: #{$title-block-width};
   }
 
