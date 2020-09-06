@@ -2,11 +2,14 @@
   <div id="header">
     <div>Suiseki <small>/ 彗跡</small></div>
     <div class="urls">
-      <a href="https://twitter.com/suisei_hosimati"><i class="icon-twitter"></i></a>
-      <a href="https://www.youtube.com/channel/UC5CwaMl1eIgY8h02uZw7u8A"><i
-          class="icon-youtube"
+      <a href="https://twitter.com/suisei_hosimati" target="_blank"><i
+          class="icon-twitter"
         ></i></a>
-      <a href="https://github.com/suisei-cn/suiseki"><i
+      <a
+        href="https://www.youtube.com/channel/UC5CwaMl1eIgY8h02uZw7u8A"
+        target="_blank"
+      ><i class="icon-youtube"></i></a>
+      <a href="https://github.com/suisei-cn/suiseki" target="_blank"><i
           class="icon-github1"
         ></i></a>
     </div>
