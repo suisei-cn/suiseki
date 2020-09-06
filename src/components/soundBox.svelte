@@ -107,13 +107,11 @@
 
   .page {
     background: $box-background-color;
-    border-radius: 5px;
+    border-radius: 20px;
     box-sizing: border-box;
     color: $box-text-color;
-    overflow: hidden auto;
-    padding: 3px 5px;
+    padding: 8px;
     position: absolute;
-    width: $dialog-width;
     z-index: 3;
 
     // Exported styles
@@ -132,19 +130,19 @@
     background: $box-indicator-color;
     content: '';
     height: $indicator-size;
-    left: -1 * $indicator-size / 2;
+    left: 0;
     position: absolute;
-    top: -1 * $indicator-size / 2;
+    top: 0;
     width: $indicator-size;
   }
 
   .page.rt::after {
     left: unset;
-    right: -1 * $indicator-size / 2;
+    right: 0;
   }
 
   .page.lb::after {
-    bottom: -1 * $indicator-size / 2;
+    bottom: 0;
     top: unset;
   }
 
