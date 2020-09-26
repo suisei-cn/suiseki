@@ -62,7 +62,6 @@
     height: $header-height;
     letter-spacing: 0.1rem;
     padding: 4px 8px;
-    text-transform: uppercase;
 
     & > * {
       flex-shrink: 0;
