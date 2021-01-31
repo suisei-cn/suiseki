@@ -1,5 +1,5 @@
 import type { GlobalConfig } from './types'
 
 export default {
-  SOUNDS_URL: 'https://static.suisei.moe/music/meta.json',
+  SOUNDS_URL: 'https://suisei-podcast.outv.im/meta.json',
 } as GlobalConfig
