@@ -66,7 +66,10 @@
             delete stars[i]
           }
         }
-        starList = Object.entries(stars)
+        starList = Object.entries(stars).map(([_, entries]) => [
+          entries[0].title,
+          entries,
+        ])
       })
       .catch((e) => {
         console.error(e)

@@ -7,8 +7,9 @@ export function categorizeSounds(
 } {
   const starList = {}
   for (const i of sounds) {
-    if (!starList[i.title]) starList[i.title] = []
-    starList[i.title].push(i)
+    const id = encodeURIComponent(i.title) + '|' + encodeURIComponent(i.artist)
+    if (!starList[id]) starList[id] = []
+    starList[id].push(i)
   }
   return starList
 }
