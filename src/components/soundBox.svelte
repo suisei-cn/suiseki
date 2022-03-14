@@ -5,7 +5,13 @@
   on:mouseout="{(e) => {
     dispatch('close')
   }}"
+  on:blur="{(e) => {
+    dispatch('close')
+  }}"
   on:mouseover="{(e) => {
+    dispatch('keep')
+  }}"
+  on:focus="{(e) => {
     dispatch('keep')
   }}"
   style="left: {commitLeft}px; top: {commitTop}px;"

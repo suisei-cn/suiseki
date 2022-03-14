@@ -96,9 +96,9 @@
     background-color: $connection-line-color;
     content: '';
     height: $line-height;
-    left: $timeline-block-width / 2;
+    left: calc($timeline-block-width / 2);
     position: absolute;
-    right: $timeline-block-width / 2;
-    top: ($timeline-height - $line-height) / 2;
+    right: calc($timeline-block-width / 2);
+    top: calc(($timeline-height - $line-height) / 2);
   }
 </style>

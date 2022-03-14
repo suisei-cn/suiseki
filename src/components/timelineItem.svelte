@@ -2,7 +2,9 @@
   <svg
     class="svgIcon"
     on:mouseout="{(e) => moveOutHandler()}"
+    on:blur="{(e) => moveOutHandler()}"
     on:mouseover="{(e) => moveInHandler()}"
+    on:focus="{(e) => moveInHandler()}"
     on:click="{(e) => (pagePermDisplayByUser = true)}"
     viewBox="0 0 16 16"
   >
@@ -70,7 +72,7 @@
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
-    margin-top: ($timeline-height / 2) - ($icon-height / 2);
+    margin-top: calc(($timeline-height / 2) - ($icon-height / 2));
     position: relative;
     width: $icon-height;
     z-index: 2;
