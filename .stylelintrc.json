@@ -1,9 +1,27 @@
 {
   "extends": "stylelint-config-standard",
-  "plugins": ["stylelint-order"],
+  "plugins": [
+    "stylelint-order"
+  ],
   "rules": {
     "order/properties-alphabetical-order": true,
     "indentation": null,
-    "declaration-colon-newline-after": null
-  }
+    "declaration-colon-newline-after": null,
+    "string-quotes": "single",
+    "font-family-no-missing-generic-family-keyword": null
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.svelte"
+      ],
+      "customSyntax": "postcss-html"
+    },
+    {
+      "files": [
+        "**/*.scss"
+      ],
+      "customSyntax": "postcss-scss"
+    }
+  ]
 }
