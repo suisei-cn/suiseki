@@ -40,7 +40,7 @@
   export let title: string
   export let index: number
 
-  let debutDate = dayjs(sounds[0].datetime).format('YYYY/MM/DD')
+  $: debutDate = dayjs(sounds[0].datetime).format('YYYY/MM/DD')
   let bodyElement: HTMLElement
 
   function getDateFormat(s: Sound): string {
