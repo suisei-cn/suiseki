@@ -2,7 +2,7 @@
 
 The musical trails of Suisei.
 
-**<https://suiseki.suisei.moe>**
+**<https://suiseki.suisei.cc>**
 
 *For a straight-forward music listening experience, see [suisei-music-web](https://github.com/suisei-cn/suisei-music-web/).*
 
