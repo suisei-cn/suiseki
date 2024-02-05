@@ -7,35 +7,27 @@ on:
 
 jobs:
   build-and-deploy:
-    if: "(!contains(github.event.commits[0].message, '[skip ci]')) && (!contains(github.event.commits[0].message, '[ci skip]'))"
+    if: (!contains(github.event.commits[0].message, '[skip ci]')) && (!contains(github.event.commits[0].message, '[ci skip]'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: '0'
 
       - name: Install and Build 🔧
         env:
-          ENV: "PRODUCTION"
+          ENV: 'PRODUCTION'
         run: |
           sed -i "s/NULL_RELEASE/$GITHUB_SHA/" src/main.ts
-          yarn
-          yarn build
+          npx pnpm install
+          npx pnpm run build
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: dist
-          SINGLE_COMMIT: true
-          CLEAN: true
-
-      - name: Announce release and deploy to Sentry
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-        run: bash utils/sentry-commit.sh
+          branch: gh-pages
+          folder: dist
+          single-commit: true
+          clean: true

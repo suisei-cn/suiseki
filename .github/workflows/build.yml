@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - name: Install and check 🔍
         run: |
-          yarn
-          yarn validate
+          npx pnpm install
+          npx pnpm run validate
 
       - name: Build 🔧
-        run: yarn build
+        run: npx pnpm run build
